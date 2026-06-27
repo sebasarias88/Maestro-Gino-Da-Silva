@@ -540,6 +540,192 @@ body::before {
 }
 
 /* ============================================================
+   COMO FUNCIONA (3 pasos)
+   ============================================================ */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.step {
+  position: relative;
+  text-align: center;
+  padding: 38px 26px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(212,175,55,0.14);
+  background: var(--grad-card);
+  transition: transform .4s ease, border-color .4s ease;
+}
+.step:hover { transform: translateY(-6px); border-color: rgba(212,175,55,0.4); }
+.step-num {
+  width: 58px; height: 58px;
+  margin: 0 auto 18px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2a1d05;
+  background: var(--grad-gold);
+  box-shadow: var(--shadow-gold);
+}
+.step h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.step p { color: var(--muted); font-size: 0.95rem; }
+.step-line {
+  position: absolute;
+  top: 67px; left: -12px;
+  width: 24px; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5));
+}
+.steps-cta { text-align: center; margin-top: 44px; }
+
+/* ============================================================
+   TIKTOK / LIVES
+   ============================================================ */
+.tiktok-section { padding-top: 0; }
+
+.tiktok-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 36px 28px 28px;
+  border-radius: 24px;
+  background: linear-gradient(160deg, rgba(22,8,42,0.97), rgba(6,3,12,0.99));
+  border: 1.5px solid rgba(212,175,55,0.55);
+  box-shadow: 0 8px 50px rgba(0,0,0,0.65), 0 0 70px rgba(107,47,181,0.12);
+}
+
+.tiktok-icon {
+  position: relative;
+  width: 96px; height: 96px;
+  display: grid; place-items: center;
+  border-radius: 26px;
+  color: var(--white);
+  background: #0a0a0a;
+  border: 1.5px solid rgba(212,175,55,0.65);
+  animation: tiktokGlow 2.8s ease-in-out infinite;
+  margin-bottom: 30px;
+}
+
+@keyframes tiktokGlow {
+  0%, 100% { box-shadow: 0 0 16px rgba(130,55,210,0.55), 0 0 40px rgba(130,55,210,0.25); }
+  50%       { box-shadow: 0 0 28px rgba(150,60,240,0.85), 0 0 60px rgba(150,60,240,0.45), 0 0 12px rgba(212,175,55,0.3); }
+}
+
+.tiktok-ring {
+  position: absolute;
+  pointer-events: none;
+}
+/* Inner ring: bright gold solid */
+.tiktok-ring--gold {
+  inset: -5px;
+  border-radius: 31px;
+  border: 1.5px solid transparent;
+  background:
+    transparent padding-box,
+    linear-gradient(135deg, #f5d060 0%, #c89a20 50%, #f5d060 100%) border-box;
+  box-shadow: 0 0 10px rgba(212,175,55,0.5);
+}
+/* Outer ring: purple gradient + brilliant glow */
+.tiktok-ring--purple {
+  inset: -15px;
+  border-radius: 41px;
+  border: 2px solid transparent;
+  background:
+    transparent padding-box,
+    linear-gradient(135deg, #d060ff 0%, #7020c8 45%, #b040f0 100%) border-box;
+  box-shadow:
+    0 0 24px rgba(170,60,255,0.75),
+    0 0 50px rgba(140,40,220,0.4),
+    inset 0 0 10px rgba(160,50,240,0.1);
+  animation: ringPulse 2.8s ease-in-out infinite;
+}
+
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #ff5050;
+  background: rgba(200,40,40,0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(230,55,55,0.8);
+}
+
+.live-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ff4444;
+  animation: urgencyPulse 1.4s ease-out infinite;
+}
+
+.tiktok-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1.25;
+  margin: 0;
+  color: var(--white);
+}
+.lives-em {
+  font-style: normal;
+  color: #e07882;
+}
+
+.tiktok-text {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.btn-tiktok {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  color: #111;
+  padding: 16px 24px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  /* White bg + gradient border: must use image layer, not color keyword */
+  border: 2.5px solid transparent;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(135deg, #a040e0 0%, #7020b8 35%, #d4af37 100%) border-box;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35), 0 0 18px rgba(140,40,220,0.25);
+}
+.btn-tiktok:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 28px rgba(160,60,255,0.4);
+}
+
+.tiktok-handle {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: -6px 0 0;
+  letter-spacing: 0.01em;
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .site-footer {
@@ -616,6 +802,8 @@ body::before {
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonial-grid { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; }
+  .steps-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; gap: 18px; }
+  .step-line { display: none; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
   .about-list { display: inline-block; text-align: left; }
   .about-text { font-size: 1.3rem; }
@@ -623,8 +811,12 @@ body::before {
 
 @media (max-width: 560px) {
   .container { padding: 0 18px; }
-  .hero { padding: 110px 0 70px; min-height: auto; }
+  .hero { padding: 88px 0 34px; min-height: auto; }
+  .hero-grid { gap: 26px; }
+  .hero-media .portrait-frame { width: min(250px, 60vw); }
   .header-cta { display: none; }
+  .section { padding: 60px 0; }
+  .section-head { margin-bottom: 36px; }
   .cards-grid { grid-template-columns: 1fr; }
   .trust-grid { grid-template-columns: 1fr; }
   .btn { width: 100%; justify-content: center; }
